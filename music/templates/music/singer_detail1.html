@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ singer.singer_name }} - 歌手信息</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+        <h1>歌手</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'song_list' %}">歌曲</a></li>
+                <li><a href="{% url 'singer_list' %}">歌手</a></li>
+                <li><a href="{% url 'search' %}">搜索</a></li>
+            </ul>
+        </nav>
+    </header>
+    <header>
+        <h1>{{ singer.singer_name }}</h1>
+        <img src="{% static 'img/' %}{{ singer.singer_id }}.jpg" alt="{{ singer_name }}">
+    </header>
+
+    <section>
+        <h2>歌手简介</h2>
+        <ul>
+            <li>{{ singer.summ }}</li>
+        </ul>
+        <h2>歌曲</h2>
+        <ul>
+            {% for song in songs %}
+            <li>
+                <img src="{% static 'img/' %}{{ song.song_id }}.jpg" alt="{{ song.title }}" width="100">
+                <a href="{% url 'song_detail' song.pk %}" target="_blank">{{ song.title }}</a>
+                
+            </li>
+            
+            {% endfor %}
+        </ul>
+    </section>
+
+    <footer>
+        <p>原始链接: <a href="{{ singer.original_url }}" target="_blank">{{ singer.original_url }}</a></p>
+    </footer>
+</body>
+</html>

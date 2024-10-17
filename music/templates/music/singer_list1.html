@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歌手列表</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+        <h1>歌手</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'song_list' %}">歌曲</a></li>
+                <li><a href="{% url 'singer_list' %}">歌手</a></li>
+                <li><a href="{% url 'search' %}">搜索</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <ul>
+            {% for singer in page_obj %}
+                <li><a href="{% url 'singer_detail' singer.pk %}">{{ singer.singer_name }}</a></li>
+            {% endfor %}
+        </ul>
+    
+
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <button onclick="window.location='?page=1'">首页</button>
+                <button onclick="window.location='?page={{ page_obj.previous_page_number }}'">上一页</button>
+            {% endif %}
+            
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <button class="current">{{ num }}</button>
+                {% else %}
+                    <button onclick="window.location='?page={{ num }}'">{{ num }}</button>
+                {% endif %}
+            {% endfor %}
+            
+            {% if page_obj.has_next %}
+                <button onclick="window.location='?page={{ page_obj.next_page_number }}'">下一页</button>
+                <button onclick="window.location='?page={{ page_obj.paginator.num_pages }}'">尾页</button>
+            {% endif %}
+            
+            <form method="get" action="" style="display: inline-block;">
+                <label for="page_input">输入页码：</label>
+                <input type="number" id="page_input" name="page" min="1" max="{{ page_obj.paginator.num_pages }}" required>
+                <button type="submit">确认</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

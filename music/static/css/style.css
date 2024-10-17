@@ -1,0 +1,245 @@
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    text-align: center;
+}
+
+header {
+    background-color: #a546e4;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    background-color: #333;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 1em;
+}
+
+nav ul li a {
+    color: #a546e4;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    display: inline-block;
+}
+
+nav ul li a:hover {
+    background-color: #b1b1b1;
+}
+
+main {
+    padding: 2em;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+li:hover {
+    background-color: #f1f1f1;
+}
+
+li a {
+    text-decoration: none;
+    color: #a546e4;
+    font-weight: bold;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.pagination button, .pagination a {
+    padding: 1px 10px;
+    text-decoration: none;
+    border: 1px solid #a546e4;
+    background-color: #a546e4;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:hover, .pagination a:hover {
+    background-color: #6500a8;
+}
+
+.pagination .current {
+    background-color: #6500a8;
+    border-color: #6500a8;
+}
+
+.pagination input[type="number"] {
+    width: 80px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.pagination button[type="submit"] {
+    padding: 6px 12px;
+    background-color: #a546e4;
+    border: 1px solid #a546e4;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button[type="submit"]:hover {
+    background-color: #6500a8;
+}
+
+.pagination label {
+    margin-right: 10px;
+    align-self: center;
+}
+
+img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+form {
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form input[type="text"] {
+    padding: 10px;
+    border: 2px solid #a546e4; 
+    border-radius: 4px;
+    font-size: 16px;
+    width: calc(100% - 24px); 
+    background-color: #f9f0ff;
+    color: #333; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input[type="text"]:focus {
+    border-color: #6500a8; 
+    box-shadow: 0 0 5px rgba(101, 0, 168, 0.5);
+    outline: none;
+}
+
+form label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+form input[type="radio"] {
+    margin: 0;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #a546e4;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: center;
+}
+
+form button:hover {
+    background-color: #6500a8;
+}
+
+#歌曲详情页面使用
+
+.lyrics {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    white-space: pre-wrap;
+    font-family: monospace;
+    margin: 2em 0;
+}
+
+.main-content {
+    display: flex;
+    padding: 2em;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.left-column, .right-column {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2em;
+}
+
+.left-column {
+    flex: 1;
+    margin-right: 1em;
+}
+
+.right-column {
+    flex: 2;
+    text-align: center;
+}
+
+.right-column pre {
+    text-align: center;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+}

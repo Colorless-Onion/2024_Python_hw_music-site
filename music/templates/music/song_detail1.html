@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ song.title }} - {{ song.singer.singer_name }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+        <h1>歌曲</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'song_list' %}">歌曲</a></li>
+                <li><a href="{% url 'singer_list' %}">歌手</a></li>
+                <li><a href="{% url 'search' %}">搜索</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="main-content">
+        <div class="left-column">
+            <h1 style="color:#a546e4">{{ song.title }}</h1>
+            <img src="{% static 'img/' %}{{ song.song_id }}.jpg" alt="{{ song.title }}" style="max-width: 350px; border-radius: 50%;">
+            <p style="text-align: center;"><strong>歌手:</strong> <a href="{% url 'singer_detail' song.singer.pk %}">{{ song.singer.singer_name }}</a></p>
+        </div>
+        
+        <div class="right-column">
+            <h2>歌词</h2>
+            <pre class="lyrics">{{ song.lyrics }}</pre>
+        </div>
+    </div>
+
+    <section>
+        <h2>评论</h2>
+        <ul>
+            {% for comment in comments %}
+            <li>
+                {{ comment.text }} - {{ comment.created_at }}
+                <form action="{% url 'delete_comment' comment.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">删除</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="text" rows="4" cols="50"></textarea><br>
+            <button type="submit">添加评论</button>
+        </form>
+    </section>
+    <footer>
+        <p>原始链接: <a href="{{ song.original_url }}" target="_blank">{{ song.original_url }}</a></p>
+    </footer>
+</body>
+</html>

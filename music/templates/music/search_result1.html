@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索页面</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+        <h1>搜索</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'song_list' %}">歌曲</a></li>
+                <li><a href="{% url 'singer_list' %}">歌手</a></li>
+                <li><a href="{% url 'search' %}">搜索</a></li>
+            </ul>
+        </nav>
+    </header>
+    <form action="{% url 'search' %}" method="get">
+        <input type="text" name="q" maxlength="20" required>
+        <label>
+            <input type="radio" name="type" value="song" required> 搜索歌曲
+        </label>
+        <label>
+            <input type="radio" name="type" value="singer" required> 搜索歌手
+        </label>
+        <button type="submit">搜索</button>
+    </form>
+
+    {% if query and search_type %}
+        <h2>"{{ query }}" 的搜索结果：</h2>
+        <p>在 {{ elapsed_time|floatformat:2 }} 秒内搜索到 {{ page_obj.paginator.count }} 个结果。</p>
+
+        <ul>
+            {% for result in page_obj %}
+                <li>
+                    {% if search_type == 'song' %}
+                        <a href="{% url 'song_detail' result.pk %}">
+                            {{ result.title }} - {{ result.singer.singer_name }}
+                        </a>
+                        <img src="{% static 'img/' %}{{ result.song_id }}.jpg" alt="{{ result.title }}" width="100">
+                    {% elif search_type == 'singer' %}
+                        <a href="{% url 'singer_detail' result.pk %}">
+                            {{ result.singer_name }}
+                        </a>
+                        <img src="{% static 'img/' %}{{ result.singer_id }}.jpg" alt="{{ result.name }}" width="100">
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <button onclick="window.location='?q={{ query }}&type={{ search_type }}&page=1'">首页</button>
+                <button onclick="window.location='?q={{ query }}&type={{ search_type }}&page={{ page_obj.previous_page_number }}'">上一页</button>
+            {% endif %}
+        
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <button class="current">{{ num }}</button>
+                {% elif num > page_obj.number|add:-5 and num < page_obj.number|add:5 %}
+                    <button onclick="window.location='?q={{ query }}&type={{ search_type }}&page={{ num }}'">{{ num }}</button>
+                {% elif num == 1 or num == page_obj.paginator.num_pages %}
+                    <button onclick="window.location='?q={{ query }}&type={{ search_type }}&page={{ num }}'">{{ num }}</button>
+                {% elif num == page_obj.number|add:-5 %}
+                    <button>...</button>
+                {% elif num == page_obj.number|add:5 %}
+                    <button>...</button>
+                {% endif %}
+            {% endfor %}
+
+
+            
+        
+            {% if page_obj.has_next %}
+                <button onclick="window.location='?q={{ query }}&type={{ search_type }}&page={{ page_obj.next_page_number }}'">下一页</button>
+                <button onclick="window.location='?q={{ query }}&type={{ search_type }}&page={{ page_obj.paginator.num_pages }}'">尾页</button>
+            {% endif %}
+        </div>
+    {% else %}
+        <p style="text-align: center">请输入搜索内容并选择搜索种类</p>
+    {% endif %}
+</body>
+</html>
